@@ -1,0 +1,195 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #1c1c1e;
+  --calc-bg: #1c1c1e;
+  --display-bg: #1c1c1e;
+  --btn-number: #333335;
+  --btn-number-hover: #4a4a4c;
+  --btn-number-active: #636366;
+  --btn-operator: #ff9f0a;
+  --btn-operator-hover: #ffb340;
+  --btn-operator-active: #ffcc80;
+  --btn-function: #636366;
+  --btn-function-hover: #7c7c80;
+  --btn-function-active: #9a9a9e;
+  --text-light: #ffffff;
+  --text-dark: #000000;
+  --display-text: #ffffff;
+  --expression-text: #8e8e93;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  --radius-btn: 50%;
+  --btn-size: 72px;
+  --gap: 12px;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f0f10 0%, #1c1c2e 50%, #16213e 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+}
+
+.calculator {
+  width: calc(4 * var(--btn-size) + 3 * var(--gap) + 32px);
+  background: var(--calc-bg);
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Display */
+.display {
+  padding: 20px 24px 16px;
+  background: var(--display-bg);
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.expression {
+  font-size: 14px;
+  color: var(--expression-text);
+  min-height: 20px;
+  word-break: break-all;
+  text-align: right;
+}
+
+.result {
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--display-text);
+  line-height: 1;
+  word-break: break-all;
+  text-align: right;
+  transition: font-size 0.1s ease;
+}
+
+.result.shrink {
+  font-size: 36px;
+}
+
+/* Buttons grid */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, var(--btn-size));
+  gap: var(--gap);
+  padding: 16px;
+  justify-content: center;
+}
+
+.btn {
+  width: var(--btn-size);
+  height: var(--btn-size);
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 400;
+  font-family: inherit;
+  transition: background-color 0.1s ease, transform 0.08s ease, filter 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.93);
+}
+
+/* Number buttons */
+.btn-number {
+  background: var(--btn-number);
+  color: var(--text-light);
+}
+
+.btn-number:hover {
+  background: var(--btn-number-hover);
+}
+
+.btn-number:active {
+  background: var(--btn-number-active);
+}
+
+/* Span-two (0 button) */
+.span-two {
+  width: calc(2 * var(--btn-size) + var(--gap));
+  border-radius: calc(var(--btn-size) / 2);
+  justify-content: flex-start;
+  padding-left: 28px;
+  font-size: 24px;
+}
+
+/* Function buttons (AC, +/-, %) */
+.btn-clear,
+.btn[data-action="sign"],
+.btn[data-action="percent"] {
+  background: var(--btn-function);
+  color: var(--text-light);
+}
+
+.btn-clear:hover,
+.btn[data-action="sign"]:hover,
+.btn[data-action="percent"]:hover {
+  background: var(--btn-function-hover);
+}
+
+.btn-clear:active,
+.btn[data-action="sign"]:active,
+.btn[data-action="percent"]:active {
+  background: var(--btn-function-active);
+}
+
+/* Operator buttons */
+.btn-equals-op,
+.btn-equals {
+  background: var(--btn-operator);
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.btn-equals-op:hover,
+.btn-equals:hover {
+  background: var(--btn-operator-hover);
+}
+
+.btn-equals-op:active,
+.btn-equals:active {
+  background: var(--btn-operator-active);
+}
+
+/* Active operator highlight */
+.btn-equals-op.active {
+  background: var(--text-light);
+  color: var(--btn-operator);
+}
+
+/* Equals */
+.btn-equals {
+  font-size: 28px;
+}
+
+/* Responsive */
+@media (max-width: 360px) {
+  :root {
+    --btn-size: 62px;
+    --gap: 10px;
+  }
+
+  .result {
+    font-size: 44px;
+  }
+}
